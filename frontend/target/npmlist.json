@@ -1,0 +1,1 @@
+{"version":"0.0.1","name":"library-manager","dependencies":{"@mantine/core":{"version":"4.2.11"},"@mantine/form":{"version":"4.2.11"},"@mantine/hooks":{"version":"4.2.11"},"@mantine/next":{"version":"4.2.11"},"next":{"version":"12.1.6"},"react-dom":{"version":"18.1.0"},"react":{"version":"18.1.0"}}}
