@@ -1,21 +1,21 @@
 import Image from 'next/image';
 
 type BookType = {
-  id: number;
+  code: number;
   title: string;
   author: string;
   publisher: string;
   year: string;
   language: string;
   cover: string;
-  category?: string;
+  genre?: string;
 };
 
 const BookCard = ({ book }: { book: BookType }) => {
   const cover_size = 256;
 
   return (
-    <div className={`bg-gray-200 rounded-md max-w-[${256}px]`}>
+    <div className={`bg-gray-200 rounded-md w-[256px]`}>
       <div className={''}>
         <Image
           src={book.cover}
@@ -26,7 +26,7 @@ const BookCard = ({ book }: { book: BookType }) => {
         />
       </div>
       <div className={'px-6 py-2'}>
-        <div className={'text-lg font-medium py-2'}>
+        <div className={'text-lg font-medium py-2 break-all'}>
           <span>{book.title}</span>
         </div>
         <div>
@@ -38,7 +38,7 @@ const BookCard = ({ book }: { book: BookType }) => {
         <div className={'flex flex-row justify-evenly py-3'}>
           <span>{book.year}</span>
           <span>{book.language}</span>
-          <span>{book.category}</span>
+          <span>{book.genre}</span>
         </div>
 
         {/* actions */}
@@ -58,8 +58,8 @@ const BookCard = ({ book }: { book: BookType }) => {
 const BooksGrid = ({ books }: { books: BookType[] }) => {
   return (
     <div className={'flex flex-row flex-wrap gap-6 justify-center'}>
-      {books.map((book) => (
-        <BookCard key={book.id} book={book} />
+      {books?.map((book) => (
+        <BookCard key={book.code} book={book} />
       ))}
     </div>
   );

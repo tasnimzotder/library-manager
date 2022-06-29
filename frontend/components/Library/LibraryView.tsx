@@ -1,17 +1,18 @@
 import BooksGrid from './BooksGrid';
 import { Autocomplete, Loader } from '@mantine/core';
-import { useRef, useState } from 'react';
-import { books } from '../../data/books';
+import { useEffect, useRef, useState } from 'react';
+import { getBooks } from '../../utils/libraryService';
+// import { books } from '../../data/books';
 
 type BookType = {
-  id: number;
+  code: number;
   title: string;
   author: string;
   publisher: string;
   year: string;
   language: string;
   cover: string;
-  category?: string;
+  genre?: string;
 };
 
 const LibraryView = () => {
@@ -20,6 +21,13 @@ const LibraryView = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<string[]>([]);
   const [displayedData, setDisplayedData] = useState<BookType[]>([]);
+  const [books, setBooks] = useState<BookType[]>([]);
+
+  useEffect(() => {
+    getBooks().then((books) => {
+      setBooks(books);
+    });
+  }, [books]);
 
   const handleChange = (val: string) => {
     window.clearTimeout(timeoutRef.current);
