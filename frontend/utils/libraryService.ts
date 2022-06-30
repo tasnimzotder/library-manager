@@ -1,6 +1,3 @@
-import { useRouter } from "next/router";
-
-
 const libraryURL = "http://localhost:8080/api/v1/library";
 const userURL = "http://localhost:8080/api/v1/user";
 
