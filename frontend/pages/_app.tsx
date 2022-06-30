@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { AuthContextProvider } from '../context/authContext';
 import ProtectedRoute from '../components/ProtectedRoute';
 
-const authRequiredPages = ['/', '/library/add-book'];
+const authRequiredPages = ['/', '/library/add-book', '/library/my-books'];
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();

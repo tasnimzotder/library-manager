@@ -1,11 +1,12 @@
 import { NextPage } from 'next';
+import AddBook from '../../components/Library/AddBook';
 
-const AddBook: NextPage = () => {
+const AddBookPage: NextPage = () => {
   return (
     <>
-      <div>Add Book</div>
+      <AddBook />
     </>
   );
 };
 
-export default AddBook;
+export default AddBookPage;

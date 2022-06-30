@@ -43,12 +43,20 @@ const NavBar = () => {
           Library Manager
         </div>
 
-        <div className={'flex flex-row gap-3 justify-center items-center'}>
-          <div>
-            <Link href="/library/add-book">
-              <a>Add Book</a>
+        <div
+          className={
+            'flex flex-row gap-3 justify-center items-center font-light'
+          }
+        >
+          <Link href="/library/add-book">
+            <a>Add Book</a>
+          </Link>
+
+          {user ? (
+            <Link href="/library/my-books">
+              <a>My Books</a>
             </Link>
-          </div>
+          ) : null}
 
           <div>
             {/* <Link href="/auth">

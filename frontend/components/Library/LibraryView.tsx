@@ -100,7 +100,10 @@ const LibraryView = () => {
         </div>
       </div>
 
-      <BooksGrid books={displayedData.length == 0 ? books : displayedData} />
+      <BooksGrid
+        ctype="add"
+        books={displayedData.length == 0 ? books : displayedData}
+      />
     </div>
   );
 };
