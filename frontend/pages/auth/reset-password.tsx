@@ -1,7 +1,12 @@
 import { NextPage } from 'next';
+import ResetPassword from '../../components/AuthPages/ResetPassword';
 
-const ResetPassword: NextPage = () => {
-  return <div>A</div>;
+const ResetPasswordPage: NextPage = () => {
+  return (
+    <div>
+      <ResetPassword />
+    </div>
+  );
 };
 
-export default ResetPassword;
+export default ResetPasswordPage;

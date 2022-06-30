@@ -15,7 +15,7 @@ import { useRouter } from 'next/router';
 const Register = () => {
   const [type, toggle] = useToggle('login', ['login', 'register']);
 
-  const { handleLogin, isLoading, user } = useAuth();
+  const { handleLogin, isLoading, handleRegister } = useAuth();
 
   const router = useRouter();
 
@@ -39,9 +39,8 @@ const Register = () => {
     <div className={'flex flex-col justify-center items-center pt-[6%]'}>
       <Paper radius={'md'} p={'xl'} className={'shadow-md max-w-lg'}>
         <Text size="lg">
-          Welcome to the{' '}
-          <span className={'font-medium'}>Network Traffic Monitor</span>, {type}{' '}
-          with
+          Welcome to the <span className={'font-medium'}>Library Manager</span>,{' '}
+          {type} with
         </Text>
 
         <Divider my={'lg'} />
@@ -119,7 +118,14 @@ const Register = () => {
             <Button
               // type="submit"
               onClick={() => {
-                handleLogin(form.values.username, form.values.password);
+                type == 'login'
+                  ? handleLogin(form.values.username, form.values.password)
+                  : handleRegister(
+                      form.values.username,
+                      form.values.email,
+                      form.values.dob,
+                      form.values.password
+                    );
               }}
               color={'cyan'}
               className={'bg-blue-500'}

@@ -26,14 +26,14 @@ public class UserService {
 
         users.add(user);
 
-        return "User added successfully";
+        return user.getUsername();
     }
 
     public String updateUserPassword(String username, int dob, String password) {
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getUsername().equals(username) && users.get(i).getDob() == dob) {
                 users.get(i).setPassword(password);
-                return "User password updated successfully";
+                return username;
             }
         }
 

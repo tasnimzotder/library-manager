@@ -21,11 +21,11 @@ public class UserController {
         this.userService = userService;
     }
 
-    // @CrossOrigin(origins = cors_origins)
-    // @GetMapping("/all")
-    // public List<User> getAllUsers() {
-    // return userService.getUsers();
-    // }
+    @CrossOrigin(origins = cors_origins)
+    @GetMapping("/all")
+    public List<User> getAllUsers() {
+        return userService.getUsers();
+    }
 
     @CrossOrigin(origins = cors_origins)
     @PostMapping("/login")
