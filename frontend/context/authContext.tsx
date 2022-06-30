@@ -29,7 +29,15 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
       },
       body: JSON.stringify({ username: username, password: password }),
     })
-      .then((response) => response.text())
+      .then((response) => {
+        if (response.status === 200) {
+          return response.text();
+        } else {
+          setIsloading(false);
+          alert('Invalid credentials');
+          throw new Error('Invalid credentials');
+        }
+      })
       .then((result) => {
         setUser(result);
         setIsloading(false);
@@ -62,7 +70,15 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
         password: password,
       }),
     })
-      .then((response) => response.text())
+      .then((response) => {
+        if (response.status === 200) {
+          return response.text();
+        } else {
+          setIsloading(false);
+          alert('Unable to register');
+          throw new Error('Unable to register');
+        }
+      })
       .then((result) => {
         setUser(result);
         setIsloading(false);
@@ -89,7 +105,15 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
         password: password,
       }),
     })
-      .then((response) => response.text())
+      .then((response) => {
+        if (response.status === 200) {
+          return response.text();
+        } else {
+          setIsloading(false);
+          alert('Invalid credentials');
+          throw new Error('Invalid credentials');
+        }
+      })
       .then((result) => {
         setUser(result);
         setIsloading(false);
