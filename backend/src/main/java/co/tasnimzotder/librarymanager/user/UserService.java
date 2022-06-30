@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import co.tasnimzotder.librarymanager.library.Book;
+import co.tasnimzotder.librarymanager.library.LibraryService;
+
 @Component
 public class UserService {
     private List<User> users = new ArrayList<>();
@@ -49,5 +52,61 @@ public class UserService {
         }
 
         throw new IllegalArgumentException("Login failed");
+    }
+
+    public String addBorrowedBooks(String username, int bookId) {
+        // String username = user.getUsername();
+
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUsername().equals(username)) {
+
+                if (users.get(i).getBorrowed_books().contains(bookId)) {
+                    throw new IllegalArgumentException("Book already borrowed");
+                }
+
+                users.get(i).borrowed_books.add(bookId);
+                return username;
+            }
+        }
+
+        throw new IllegalArgumentException("User does not exist");
+    }
+
+    public String returnBorrowedBooks(String username, int bookId) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUsername().equals(username)) {
+                for (int j = 0; j < users.get(i).borrowed_books.size(); j++) {
+                    if (users.get(i).borrowed_books.get(j) == bookId) {
+                        users.get(i).borrowed_books.remove(j);
+                    }
+                }
+                return username;
+            }
+        }
+
+        throw new IllegalArgumentException("User does not exist");
+    }
+
+    public List<Book> getBorrowedBooks(User user) {
+        List<Book> books = new ArrayList<Book>();
+        String username = user.getUsername();
+
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUsername().equals(username)) {
+                List<Integer> books_list = users.get(i).borrowed_books;
+
+                if (books_list.size() == 0) {
+                    return books;
+                }
+
+                for (int j = 0; j < books_list.size(); j++) {
+                    books.add(new LibraryService().getBookByCode(books_list.get(j)));
+                }
+
+                return books;
+            }
+        }
+
+        throw new IllegalArgumentException("User does not exist");
     }
 }
