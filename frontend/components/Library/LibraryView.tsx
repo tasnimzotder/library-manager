@@ -2,6 +2,7 @@ import BooksGrid from './BooksGrid';
 import { Autocomplete, Loader } from '@mantine/core';
 import { useEffect, useRef, useState } from 'react';
 import { getBooks } from '../../utils/libraryService';
+import { useRouter } from 'next/router';
 // import { books } from '../../data/books';
 
 type BookType = {
@@ -23,11 +24,13 @@ const LibraryView = () => {
   const [displayedData, setDisplayedData] = useState<BookType[]>([]);
   const [books, setBooks] = useState<BookType[]>([]);
 
+  const router = useRouter();
+
   useEffect(() => {
     getBooks().then((books) => {
       setBooks(books);
     });
-  }, [books]);
+  }, [books, router.pathname]);
 
   const handleChange = (val: string) => {
     window.clearTimeout(timeoutRef.current);

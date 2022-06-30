@@ -10,16 +10,14 @@ import {
   Divider,
 } from '@mantine/core';
 import { useAuth } from '../../context/authContext';
+import { useRouter } from 'next/router';
 
 const Register = () => {
-  // private String username;
-  // private String password;
-  // private String email;
-  // private int dob;
-
   const [type, toggle] = useToggle('login', ['login', 'register']);
 
   const { handleLogin, isLoading, user } = useAuth();
+
+  const router = useRouter();
 
   const form = useForm({
     initialValues: {
@@ -39,7 +37,6 @@ const Register = () => {
 
   return (
     <div className={'flex flex-col justify-center items-center pt-[6%]'}>
-      {JSON.stringify(user)}
       <Paper radius={'md'} p={'xl'} className={'shadow-md max-w-lg'}>
         <Text size="lg">
           Welcome to the{' '}
@@ -49,15 +46,7 @@ const Register = () => {
 
         <Divider my={'lg'} />
 
-        <form
-          // onSubmit={form.onSubmit(() => {
-          //   alert('knk');
-          // })}
-
-          onSubmit={() => {
-            handleLogin(form.values.username, form.values.password);
-          }}
-        >
+        <form>
           <Group direction="column" grow>
             <TextInput
               required
@@ -103,17 +92,29 @@ const Register = () => {
           </Group>
 
           <Group position="apart" mt={'xl'}>
-            <Anchor
-              component={'button'}
-              type="button"
-              color={'gray'}
-              onClick={() => toggle()}
-              size="xs"
-            >
-              {type == 'register'
-                ? 'Already have an account? Login'
-                : "Don't have an account? Register"}
-            </Anchor>
+            <div className={'flex flex-col items-start'}>
+              <Anchor
+                component={'button'}
+                type="button"
+                color={'gray'}
+                onClick={() => toggle()}
+                size="xs"
+              >
+                {type == 'register'
+                  ? 'Already have an account? Login'
+                  : "Don't have an account? Register"}
+              </Anchor>
+
+              <Anchor
+                component={'button'}
+                type="button"
+                size={'xs'}
+                color={'gray'}
+                onClick={() => router.push('/auth/reset-password')}
+              >
+                Forget Password?
+              </Anchor>
+            </div>
 
             <Button
               // type="submit"

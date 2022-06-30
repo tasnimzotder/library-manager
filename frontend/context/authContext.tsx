@@ -20,28 +20,27 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   const handleLogin = async (username: string, password: string) => {
     setIsloading(true);
 
+    console.log('handleLogin');
+
     await fetch(`${authURL}/login`, {
       method: 'POST',
-      mode: 'no-cors',
       headers: {
-        Host: 'localhost:3000',
         'Content-Type': 'application/json',
-        'Content-Length': String(username.length + password.length),
       },
-      body: JSON.stringify(['admin', 'password']),
+      body: JSON.stringify({ username: username, password: password }),
     })
-      .then((res) => res.text())
+      .then((response) => response.text())
       .then((result) => {
-        console.log({ result });
-        // alert(result);
-
-        // setUser(result);
-        // router.push('/');
+        setUser(result);
         setIsloading(false);
+        router.push('/');
       })
-      .catch((err) => {
-        console.log({ err });
-      });
+      .catch((error) => console.log({ error }));
+  };
+
+  const handleLogout = async () => {
+    setUser(null);
+    router.push('/auth');
   };
 
   return (
@@ -50,6 +49,7 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
         user,
         isLoading,
         handleLogin,
+        handleLogout,
       }}
     >
       {children}

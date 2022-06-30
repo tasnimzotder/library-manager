@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class LibraryController {
 
     private final LibraryService libraryService;
-    private final String cors_origins = "http://localhost:3000";
+    // private final String cors_origins = "http://localhost:3000";
+    private final String cors_origins = "*";
 
     @Autowired
     public LibraryController(LibraryService libraryService) {

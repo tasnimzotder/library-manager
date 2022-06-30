@@ -3,13 +3,15 @@ import { ReactNode, useEffect, useState } from 'react';
 import { useAuth } from '../context/authContext';
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
-  // const { isLoggedIn } = useAuth();
+  const { user } = useAuth();
 
   const router = useRouter();
 
-  // useEffect(() => {
-  //   console.log(isLoggedIn);
-  // }, [router.pathname]);
+  useEffect(() => {
+    if (!user) {
+      router.push('/auth');
+    }
+  }, [router.pathname]);
 
   useEffect(() => {
     // if (!localStorage.getItem('token')) {

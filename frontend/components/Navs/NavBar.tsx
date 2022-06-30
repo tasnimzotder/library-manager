@@ -1,8 +1,31 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useAuth } from '../../context/authContext';
 
 const NavBar = () => {
   const router = useRouter();
+  const { user, handleLogout } = useAuth();
+
+  const HandleAuth = () => {
+    return (
+      <>
+        {user ? (
+          <div
+            className={'cursor-pointer'}
+            onClick={() => {
+              handleLogout();
+            }}
+          >
+            Logout
+          </div>
+        ) : (
+          <Link href="/auth">
+            <a>Auth</a>
+          </Link>
+        )}
+      </>
+    );
+  };
 
   return (
     <>
@@ -22,15 +45,16 @@ const NavBar = () => {
 
         <div className={'flex flex-row gap-3 justify-center items-center'}>
           <div>
-            <Link href="/add-book">
-              <a>Books</a>
+            <Link href="/library/add-book">
+              <a>Add Book</a>
             </Link>
           </div>
 
           <div>
-            <Link href="/auth">
-              <a>Auth</a>
-            </Link>
+            {/* <Link href="/auth">
+              <a>{user ? user : 'Auth'}</a>
+            </Link> */}
+            <HandleAuth />
           </div>
         </div>
       </nav>
